@@ -51,7 +51,7 @@ main()
     int roundnum = 1;
     int choice;
     int done = 0;
-    char sure;
+    char sure = 'n';
 
 
     do { //Start main game loop (lasts for 100 rounds max).
@@ -106,11 +106,10 @@ main()
                         printf("...and you have %d soldiers left to deploy.\n", soldiers);
                         printf("\n");
                         printf("Are you sure you want to exit? (y/n)\n");
-                        scanf(" %c", sure);
+                        scanf(" %c", &sure);
                         if (sure == 'y' || sure =='Y') {
-                            exit(1); //for some reason, when this exit(1) command is contained in this if/else loop
-                                    //The program will generate an error in Windows "Stopped working unexpectedly."
-                                    //It does not generate this error if outside the if/else loop.
+                            printf("exiting");
+                            exit(1);
                         }
                         else {
                             continue;
