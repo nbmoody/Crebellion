@@ -44,8 +44,8 @@ main()
     printf("Each turn you will gain 30 more soldiers to place in your cities.\n");
     printf("If the people in a city grow more angry than the soldiers can control, that city will rebel.\n");
     printf("If any of your cities rebel, your empire will break and your name will be forgotten.\n");
-    printf("1 soldier will control 1 point of anger in a city. Each turn\n");
-    printf("you must decide how many soldiers to distribute to each city.\n\n\ne");
+    printf("1 soldier will control 1 point of anger in a city.\n");
+    printf("Each turn, you must decide how many soldiers to distribute to each city.\n\n\n");
 
     //Begin game.
     int roundnum = 1;
@@ -60,68 +60,116 @@ main()
             soldiers += 30;
             done = 0; //serves as a flag for completing the round. Needs to reset to 0 each round.
         }
-        else {
 
-            //Main menu during each round.
-            printf("It is round %d! What would you like to do?\n", roundnum);
-            printf("1. Place new soldiers in your cities. (You have %d left)\n", soldiers);
-            printf("2. See a report on how many soldiers are in each city.\n");
-            printf("3. See a report on how angry your cities are currently.\n");
-            printf("4. End the round.\n");
-            printf("5. Quit the game.\n");
-            scanf(" %d", &choice);
-                switch (choice) {
-                    case (1):
-                        printf("How many soldiers should be stationed in %s?\n", city1);
-                        scanf(" %d", &numsoldiers);
-                        if ((soldiers - numsoldiers) >= 0) {
-                            c1sd += numsoldiers;
-                            soldiers -= numsoldiers;
-                        } else {
-                            printf("You don't have enough new soldiers to add that many.\n");
-                            printf("You only have %d soldiers left to distribute.\n", soldiers);
-                        }
-                        printf("\n");
+
+        //Main menu during each round.
+        printf("It is round %d! What would you like to do?\n", roundnum);
+        printf("1. Place new soldiers in your cities. (You have %d left)\n", soldiers);
+        printf("2. See a report on how many soldiers are in each city.\n");
+        printf("3. See a report on how angry your cities are currently.\n");
+        printf("4. End the round.\n");
+        printf("5. Quit the game.\n");
+        scanf(" %d", &choice);
+            switch (choice) {
+                case (1):
+                    printf("%s's anger level is %d.\n", city1, c1ang);
+                    printf("\t...and it currently has %d soldiers.\n", c1sd);
+                    printf("How many soldiers should be stationed in %s?\n", city1);
+                    scanf(" %d", &numsoldiers);
+                    if ((soldiers - numsoldiers) >= 0) {
+                        c1sd += numsoldiers;
+                        soldiers -= numsoldiers;
+                    } else {
+                        printf("You don't have enough new soldiers to add that many.\n");
+                        printf("You only have %d soldiers left to distribute.\n", soldiers);
+                    }
+                    printf("\n");
+                    printf("%s's anger level is %d.\n", city2, c2ang);
+                    printf("\t...and it currently has %d soldiers.\n", c2sd);
+                    printf("How many soldiers should be stationed in %s?\n", city2);
+                    scanf(" %d", &numsoldiers);
+                    if ((soldiers - numsoldiers) >= 0) {
+                        c2sd += numsoldiers;
+                        soldiers -= numsoldiers;
+                    } else {
+                        printf("You don't have enough new soldiers to add that many.\n");
+                        printf("You only have %d soldiers left to distribute.\n", soldiers);
+                    }
+                    printf("\n");
+                    printf("%s's anger level is %d.\n", city3, c3ang);
+                    printf("\t...and it currently has %d soldiers.\n", c3sd);
+                    printf("How many soldiers should be stationed in %s?\n", city3);
+                    scanf(" %d", &numsoldiers);
+                    if ((soldiers - numsoldiers) >= 0) {
+                        c3sd += numsoldiers;
+                        soldiers -= numsoldiers;
+                    } else {
+                        printf("You don't have enough new soldiers to add that many.\n");
+                        printf("You only have %d soldiers left to distribute.\n", soldiers);
+                    }
+                    printf("\n");
+                    continue;
+                case (2):
+                    printf("You currently have:\n");
+                    printf("\t%d soldiers in %s.\n", c1sd, city1);
+                    printf("\t%d soldiers in %s.\n", c2sd, city2);
+                    printf("\t%d soldiers in %s.\n", c3sd, city3);
+                    continue;
+                case (3):
+                    printf("%s's anger level is: %d\n", city1, c1ang);
+                    printf("%s's anger level is: %d\n", city2, c2ang);
+                    printf("%s's anger level is: %d\n", city3, c3ang);
+                    printf("\n");
+                    continue;
+                case (4):
+                    done = 1;
+                    break;
+                case (5):
+                    printf("It is round %d,\n", roundnum);
+                    printf("%s's anger level is: %d\n", city1, c1ang);
+                    printf("%s's anger level is: %d\n", city2, c2ang);
+                    printf("%s's anger level is: %d\n", city3, c3ang);
+                    printf("...and you have %d soldiers left to deploy.\n", soldiers);
+                    printf("\n");
+                    printf("Are you sure you want to exit? (y/n)\n");
+                    scanf(" %c", &sure);
+                    if (sure == 'y' || sure =='Y') {
+                        printf("exiting");
+                        exit(1);
+                    }
+                    else {
                         continue;
-                    case (2):
-                        printf("You currently have:\n");
-                        printf("\t%d soldiers in %s.\n", c1sd, city1);
-                        printf("\t%d soldiers in %s.\n", c2sd, city2);
-                        printf("\t%d soldiers in %s.\n", c3sd, city3);
-                        continue;
-                    case (3):
-                        printf("%s's anger level is: %d\n", city1, c1ang);
-                        printf("%s's anger level is: %d\n", city2, c2ang);
-                        printf("%s's anger level is: %d\n", city3, c3ang);
-                        printf("\n");
-                        continue;
-                    case (4):
-                        done = 1;
-                        break;
-                    case (5):
-                        printf("It is round %d,\n", roundnum);
-                        printf("%s's anger level is: %d\n", city1, c1ang);
-                        printf("%s's anger level is: %d\n", city2, c2ang);
-                        printf("%s's anger level is: %d\n", city3, c3ang);
-                        printf("...and you have %d soldiers left to deploy.\n", soldiers);
-                        printf("\n");
-                        printf("Are you sure you want to exit? (y/n)\n");
-                        scanf(" %c", &sure);
-                        if (sure == 'y' || sure =='Y') {
-                            printf("exiting");
-                            exit(1);
-                        }
-                        else {
-                            continue;
-                        }
-                    default:
-                        printf("That is not a valid choice, sorry. Try again!\n\n");
-                        continue;
-                }
-        }
+                    }
+                default:
+                    printf("That is not a valid choice, sorry. Try again!\n\n");
+                    continue;
+            }
+
+
         //Check for rebellion in any city. IF rebellion, end game and show roundnum.
-        //Recalculate anger levels, somehow vary.
+        if (c1ang > c1sd) {
+            printf("Grievous news, sire! %s has rebelled against your rule! Your empire collapses!\n", city1);
+            printf("Your rule lasted %d rounds.\n", roundnum);
+            exit(1);
+        }
+        else if (c2ang > c2sd) {
+            printf("Grievous news, sire! %s has rebelled against your rule! Your empire collapses!\n", city2);
+            printf("Your rule lasted %d rounds.\n", roundnum);
+            exit(1);
+        }
+        else if (c3ang > c3sd) {
+            printf("Grievous news, sire! %s has rebelled against your rule! Your empire collapses!\n", city3);
+            printf("Your rule lasted %d rounds.\n", roundnum);
+            exit(1);
+        }
+        else {
+            printf("None of your cities rebelled this turn!\n"); //This is printing 2 times for some reason.
+        }
 
+        //Recalculate anger levels, somehow vary.
+        c1ang += (rand() % 10 + 8);
+        c2ang += (rand() % 10 + 8);
+        c3ang += (rand() % 10 + 8);
 
 
     } while (roundnum <=100);//End main game loop. ALSO NEEDS TO END IF REBELLION = TRUE!
